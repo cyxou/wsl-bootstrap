@@ -1,0 +1,42 @@
+[hub]
+        protocol = https
+[user]
+        name = {{ full_name }}
+        email = {{ git_email }}
+{% if git_signing_key %}
+        signingkey = {{ git_signing_key }}
+{% endif %}
+{% if ansible_os_family == 'Darwin' %}
+[credential]
+        helper = osxkeychain
+{% endif %}
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+        ui = true
+[core]
+        excludesfile = ~/.gitignore_global
+        editor = vim
+        autocrlf = input
+        filemode = false
+[apply]
+        whitespace = nowarn
+[mergetool]
+        keepBackup = false
+[difftool]
+        prompt = false
+[push]
+        # See `git help config` (search for push.default)
+        # for more information on different options of the below setting.
+        #
+        # Setting to git 2.0 default to surpress warning message
+        default = simple
+{% if git_user %}
+[github]
+        user = {{ git_user }}
+{% endif %}
+{% if git_signing_key %}
+[commit]
+        gpgsign = true
+{% endif %}

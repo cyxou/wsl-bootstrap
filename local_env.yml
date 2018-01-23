@@ -1,0 +1,27 @@
+---
+- name: Collecting Facts
+  hosts: local
+  gather_facts: yes
+
+- name: Set up local development environment
+  hosts: localhost
+  connection: local
+  # roles are a way to group tasks; they will run in the sequence determined here
+  roles:
+    - common
+    - git
+    - zsh
+    - tmux
+    - docker
+    - docker-compose
+    - docker-sync
+    - nvm
+  
+  vars_prompt:
+    - name: "full_name"
+      prompt: "Your full name like in UPSA (will be used in git commit messages)"
+      private: false
+
+    - name: "git_email"
+      prompt: "Your email to sign git commits"
+      private: false

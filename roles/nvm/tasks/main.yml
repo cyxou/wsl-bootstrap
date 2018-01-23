@@ -1,0 +1,23 @@
+---
+- name: Install nvm dependencies
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  with_items:
+    - build-essential
+    - libssl-dev
+  become: yes
+  tags: nvm
+
+- name: Install nvm
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{ dotfiles_user_home }}/.nvm"
+  tags: nvm
+
+- name: Source nvm in ~/.zshrc
+  lineinfile:
+    path: "{{ dotfiles_user_home }}/.zshrc"
+    line: "{{ item }}"
+  with_items:
+    - 'export NVM_DIR="$HOME/.nvm"'
+    - '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+  tags: nvm

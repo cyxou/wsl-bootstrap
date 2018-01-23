@@ -1,0 +1,65 @@
+# WSL-bootstrap
+
+This project aims to bootstrap your WSL distribution (currently only Ubuntu supported) with opinionated development tools and configs.
+Before you start using this repo, please install WSL following the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10#for-anniversary-update-and-creators-update-install-using-lxrun).
+
+__Please choose Ubuntu as it is the only Linux distribution which is supported by WSL-bootstrap__
+
+Once WSL installed, proceed next.
+
+## Configure terminal
+
+For a better development experience with WSL, install the [Hyper](https://hyper.is) terminal.
+Once Hyper installed, open it's configuration file (Ctrl+Comma), find the `shell` parameter and assign it the following value:
+
+```
+shell: 'C:\\Windows\\System32\\bash.exe'
+```
+
+Now you will be dropped into your WSL shell every time you launch Hyper.
+
+### Terminal font
+
+WSL-bootstrap uses Powerline symbols to make your console look awesome. In order to display those symbols correctly, on your Windows host install one of your favourite fonts patched with Powerline symbols from the [powerline/fonts](https://github.com/powerline/fonts) repository.
+
+Once Powerline font is installed, open the Hyper config file (Ctrl+Comma) and specify your font like this:
+
+```
+fontFamily: '"Ubuntu Mono derivative Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+```
+
+Restart Hyper and you should be dropped into your Linux shell with specified font.
+
+
+## Install WSL-bootstrap
+
+Clone this repo:
+
+```sh
+git clone https://git.epam.com/Aleksandr_Sukhovetchenko/wsl-bootstrap.git
+```
+
+Next make sure that the WSL-bootstrap is available from the /home/<your_linux_user> folder in your Linux distro.
+To do this just symlink the WSL-bootstrap repo into the root of your home folder in Linux distro. Open your Bash terminal (Hyper) and run:
+
+```sh
+ln -s /mnt/c/Users/<YOUR_USERNAME>/path/to/cloned/wsl-bootstrap ~/wsl-bootstrap
+```
+
+## Bootstrapping your Linux distribution
+
+Now when you have your Linux shell opened it's time to bootstrap it.
+Bootstrapping is performed by Ansible. So the first step is to install Ansible.
+You can do it manually following [official documentation](http://docs.ansible.com/ansible/latest/intro_installation.html#latest-releases-via-apt-ubuntu) or using the *install_ansible_ubuntu.sh* bash script:
+
+```sh
+sudo ~/wsl-bootstrap/bin/install_ansible_ubuntu.sh
+```
+
+Once Ansible installed, run:
+
+```sh
+~/wsl-bootstrap/bin/wsl-bootstrap
+```
+
+Ansible will ask for your SUDO password. Type it in and go get a cup of coffee. When bootstraping complete, close the terminal and open it again. Enjoy!

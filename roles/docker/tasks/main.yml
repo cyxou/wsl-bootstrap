@@ -1,0 +1,7 @@
+
+- import_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+# - import_tasks: osx.yml
+#   when: ansible_os_family == "Darwin"
+# - import_tasks: redhat.yml
+#   when: ansible_os_family == "RedHat"
