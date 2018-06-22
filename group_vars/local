@@ -5,7 +5,7 @@
 #  Local home directory
 dotfiles_user_home: "{{ '~' | expanduser }}"
 # Where this repo lives. Probably don't need to change this.
-dotfiles_home: "{{dotfiles_user_home}}/code/wsl-bootstrap"
+dotfiles_home: "{{dotfiles_user_home}}/wsl-bootstrap"
 
 # Name used in commit messages
 full_name:
