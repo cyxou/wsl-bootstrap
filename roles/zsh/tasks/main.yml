@@ -1,4 +1,3 @@
-
 # Installation and setup
 - import_tasks: debian.yml
   when: ansible_os_family == "Debian"
@@ -28,7 +27,7 @@
   copy:
     src: "{{ dotfiles_home }}/roles/zsh/files/.zshrc"
     dest: "{{ dotfiles_user_home }}/.zshrc"
-  when: cloning|succeeded
+  when: cloning is succeeded
 
 # When using WSL on Windows prior 16215 build, we can't change the shell with
 # the `chsh -s /usr/bin/zsh` command. We need to launch zsh from the .bashrc file.
