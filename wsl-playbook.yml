@@ -4,8 +4,7 @@
   gather_facts: yes
 
 - name: Set up local development environment
-  hosts: localhost
-  connection: local
+  hosts: local
   # roles are a way to group tasks; they will run in the sequence determined here
   roles:
     - wsl

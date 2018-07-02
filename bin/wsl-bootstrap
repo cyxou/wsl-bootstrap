@@ -1,2 +1,3 @@
-echo "Setting up local dev environment..."
-ansible-playbook -i ~/wsl-bootstrap/hosts  ~/wsl-bootstrap/local_env.yml -K
+echo "Setting up your WSL environment..."
+DIR=$(dirname "$(readlink -f "$0")")
+ansible-playbook -i ${DIR}/../hosts  ${DIR}/../wsl-playbook.yml -K

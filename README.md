@@ -80,3 +80,10 @@ To bootstrap your Ubuntu installation, run:
 ```
 
 Ansible will ask for your SUDO password. Type it in and go get a cup of coffee. When bootstraping completes, close the terminal and open it again. Enjoy!
+
+_PS._ Last thing before you go. Your symlinked wsl-bootstrap project will be unavailable after Ansible does it's heavylifting. This is because after restarting bootstrapped WSL distro, Windows drives will be mapped to the root of the linux distro (/), not under the /mnt/ as by default (thanks to /etc/wsl.conf). Thus you'll have to manually remove the symlinked wsl-bootstrap folder and create the symlink it again:
+
+```sh
+rm ~/wsl-bootstrap
+ln -s /c/Users/<YOUR_USERNAME>/path/to/cloned/wsl-bootstrap ~/wsl-bootstrap
+```
