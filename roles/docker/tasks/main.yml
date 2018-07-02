@@ -11,7 +11,7 @@
     path: "{{ wsl_bootstrap_user_home }}/.zshrc"
     regexp: "DOCKER_HOST"
     line: "export DOCKER_HOST='tcp://0.0.0.0:2375'"
-  when: docker_toolbox
+  when: not docker_toolbox
 
 - name: Launch Docker Toolbox on host
   block:

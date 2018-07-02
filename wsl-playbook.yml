@@ -20,8 +20,8 @@
   vars_prompt:
     - name: "full_name"
       prompt: "Your full name (will be used in git commit messages)"
-      private: false
+      private: no
 
     - name: "git_email"
       prompt: "Your email to sign git commits"
-      private: false
+      private: no
