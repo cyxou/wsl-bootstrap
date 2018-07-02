@@ -3,9 +3,9 @@
 # NOTE: The below 2 variables should not need to be changed if you cloned
 #   this repo to '~/wsl-bootstrap'
 #  Local home directory
-dotfiles_user_home: "{{ '~' | expanduser }}"
+wsl_bootstrap_user_home: "{{ '~' | expanduser }}"
 # Where this repo lives. Probably don't need to change this.
-dotfiles_home: "{{dotfiles_user_home}}/wsl-bootstrap"
+wsl_bootstrap_home: "{{wsl_bootstrap_user_home}}/wsl-bootstrap"
 
 # Name used in commit messages
 full_name:
@@ -19,3 +19,8 @@ git_email:
 # GPG Key ID used to sign git commits
 # See https://github.com/pstadler/keybase-gpg-github setup instructions
 git_signing_key:
+
+# If you are using Docker Tollbox and not Docker for Windows then set this value to 'yes'.
+# Otherwise do not asign any value to it.
+# Docker Toolbox is mostly used when Hyper-V is unavailable, e.i. Windows Home edition.
+docker_toolbox:

@@ -1,3 +1,6 @@
+# Skip the verification of insecure directories
+ZSH_DISABLE_COMPFIX="true"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -7,7 +10,36 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+POWERLEVEL9K_MODE="nerdfont-complete"
+
+#POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=true
+
+POWERLEVEL9K_FOLDER_ICON=''
+POWERLEVEL9K_HOME_ICON=''
+POWERLEVEL9K_HOME_SUB_ICON=''
+POWERLEVEL9K_DIR_PATH_SEPARATOR='  '
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator)
+POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND='blue'
+POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='black'
+POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND='green'
+POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND='black'
+
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_with_package_name"
+POWERLEVEL9K_SHORTEN_DELIMITER=".."
+
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="▶ "
+
+#POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=$'\uE0C6'
+#POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0C7'
+
+POWERLEVEL9K_VCS_GIT_ICON=''
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -61,6 +93,7 @@ ZSH_THEME="agnoster"
 plugins=(
   git
   docker
+  aws
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -96,3 +129,14 @@ prompt_context() {}
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls --color -lh --group-directories-first'
+
+# Fix ls colors
+LS_COLORS="ow=01;36;40" && export LS_COLORS
+
+# Make cd use the ls colours
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+autoload -z compinit
+compinit -u
+
+# This is needed in order to run tools installed with pip --user
+export PATH=$PATH:~/.local/bin

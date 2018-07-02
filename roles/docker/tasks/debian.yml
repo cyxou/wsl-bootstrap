@@ -24,101 +24,10 @@
   apt:
     name: docker-ce
     state: present
-  update_cache: yes
+    update_cache: yes
   register: apt_result
   until: apt_result is succeeded
   retries: 3
   delay: 1
   become: yes
   ignore_errors: yes
-
-- name: Installing Python dependencies for docker compose
-  easy_install:
-    name: pip
-    state: latest
-  become: yes
-
-- name: Installing docker compose
-  pip:
-    name: docker-compose
-    state: latest
-  become: yes
-
-# When using WSL on Windows we want to connect to the Docker daemon working on host 
-- name: Specify host url of the host docker daemon
-  lineinfile:
-    path: "{{ dotfiles_user_home }}/.zshrc"
-    regexp: "DOCKER_HOST"
-    line: "export DOCKER_HOST='tcp://0.0.0.0:2375'"
-
-# - name: Update apt update
-#   apt: update_cache=yes cache_valid_time=3600
-#   register: apt_result
-#   until: apt_result is succeeded
-#   retries: 3
-#   delay: 1
-#   sudo: yes
-#   ignore_errors: yes
-
-# - name: Retry if needed using command apt-get update
-#   command: apt-get update
-#   sudo: yes
-#   when: apt_result is failed
-
-# - name: Install Docker CE
-#   apt: name=docker-ce state=latest
-#   become: yes
-
-- name: Install ruby
-  apt: "name={{ item }} state=present"
-  with_items:
-    - ruby
-    - ruby-dev
-  become: yes
-
-- name: Install docker-sync
-  gem:
-    name: docker-sync
-    state: latest
-  become: yes
-  become_method: sudo
-
-- name: Install Unison
-  get_url:
-    url: https://github.com/bcpierce00/unison/archive/2.48.4.tar.gz
-    dest: /tmp/2.48.4.tar.gz
-  register: unison_download
-
-
-# - name: Install Unison dependencies
-#   apt: "name={{ item }} state=present"
-#   with_items:
-#     - ocaml
-#     - make
-#     - emacs-nox
-#   become: yes
-
-# - name: Download Unison
-#   get_url:
-#     url: https://github.com/bcpierce00/unison/archive/2.48.4.tar.gz
-#     dest: /tmp/2.48.4.tar.gz
-#   register: unison_download
-
-# - name: Unarchive Unison
-#   unarchive:
-#     src: /tmp/2.48.4.tar.gz
-#     dest: /tmp
-#   when: unison_download is succeeded
-
-# - name: Make Unison
-#   make:
-#     chdir: /tmp/unison-2.48.4
-#     target: install
-#     params: UISTYLE=text
-#   become: yes
-
-# - name: Copy Unison bin files
-#   command: |
-#     cp /tmp/unison-2.48.4/unison /usr/local/bin/unison
-#     cp /tmp/unison-2.48.4/unison-fsmonitor /usr/local/bin/unison-fsmonitor
-#   become: yes

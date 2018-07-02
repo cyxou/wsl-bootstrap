@@ -2,48 +2,48 @@
 - import_tasks: debian.yml
   when: ansible_os_family == "Debian"
 
-- name: Check if tmux installed
-  shell: command -v tmux >/dev/null 2>&1
-  register: tmux_not_exist
-  ignore_errors: yes
+# - name: Check if tmux installed
+#   shell: command -v tmux >/dev/null 2>&1
+#   register: tmux_not_exist
+#   failed_when: tmux_not_exist.rc > 0
 
-- debug: msg="{{ tmux_not_exist.rc }}" # it returns rc 0
+# - debug: msg="{{ tmux_not_exist.rc }}" # it returns rc 0
 
-- name: Install tmux from source
-  when: tmux_not_exist.rc == 1
-  block:
-    - name: Download tmux v2.6 sources
-      get_url:
-        url: https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
-        dest: /tmp/tmux-2.6.tar.gz
+# - name: Install tmux from source
+#   when: tmux_not_exist.rc == 1
+#   block:
+#     - name: Download tmux v2.6 sources
+#       get_url:
+#         url: https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
+#         dest: /tmp/tmux-2.6.tar.gz
 
-    - name: Unarchive tmux sources
-      unarchive:
-        src: /tmp/tmux-2.6.tar.gz
-        dest: /tmp
+#     - name: Unarchive tmux sources
+#       unarchive:
+#         src: /tmp/tmux-2.6.tar.gz
+#         dest: /tmp
 
-    - name: Configure tmux
-      command: ./configure
-      args:
-        chdir: /tmp/tmux-2.6
+#     - name: Configure tmux
+#       command: ./configure
+#       args:
+#         chdir: /tmp/tmux-2.6
 
-    - name: Prepare tmux
-      command: make
-      args:
-        chdir: /tmp/tmux-2.6
+#     - name: Prepare tmux
+#       command: make
+#       args:
+#         chdir: /tmp/tmux-2.6
 
-    - name: Make install tmux
-      make:
-        chdir: /tmp/tmux-2.6
-        target: install
-      become: yes
+#     - name: Make install tmux
+#       make:
+#         chdir: /tmp/tmux-2.6
+#         target: install
+#       become: yes
 
 - name: Make sure tmux.conf is up to date
   template:
     src: "tmux.conf.j2"
-    dest: "{{ dotfiles_user_home }}/.tmux.conf"
+    dest: "{{ wsl_bootstrap_user_home }}/.tmux.conf"
 
 - name: Install Tmux Plugin Manager
   git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: "{{ dotfiles_user_home }}/.tmux/plugins/tpm"
+    dest: "{{ wsl_bootstrap_user_home }}/.tmux/plugins/tpm"

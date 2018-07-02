@@ -1,13 +1,15 @@
 
-- name: Add nessessary PPAs
-  apt_repository:
-    repo: ppa:hadret/fswatch
-    state: present
-  become: yes
+# - name: Add nessessary PPAs
+#   apt_repository:
+#     repo: ppa:hadret/fswatch
+#     state: present
+#   become: yes
 
 - name: Install common packages
   apt: "name={{ item }} state=latest update_cache=yes"
   with_items:
     - tree
-    - fswatch
+    - python-pip
+    - python-setuptools
+    # - fswatch
   become: yes

@@ -104,7 +104,7 @@ bind e setw synchronize-panes
 set -sg escape-time 0
 
 # Reload tmux config
-bind r source-file {{dotfiles_user_home}}/.tmux.conf \; display-message 'Reloaded ~/.tmux.conf!'
+bind r source-file {{wsl_bootstrap_user_home}}/.tmux.conf \; display-message 'Reloaded ~/.tmux.conf!'
 
 # Set window notifications
 setw -g monitor-activity on
@@ -114,7 +114,7 @@ set -g visual-activity off
 bind-key X kill-window \; display-message 'Window killied!'
 bind-key x kill-pane \; display-message 'Pane killied!'
 
-source-file {{dotfiles_home}}/roles/tmux/files/statusline.conf
+source-file {{wsl_bootstrap_home}}/roles/tmux/files/statusline.conf
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
@@ -126,4 +126,4 @@ set -g @plugin 'tmux-plugins/tmux-copycat'
 set -g @resurrect-strategy-vim 'session'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run '{{dotfiles_user_home}}/.tmux/plugins/tpm/tpm'
+run '{{wsl_bootstrap_user_home}}/.tmux/plugins/tpm/tpm'

@@ -1,9 +1,10 @@
 
-- name: Install Python dependencies for docker compose
-  easy_install:
-    name: pip
-    state: latest
-  become: yes
+# Pip is installed in common role
+# - name: Install Python dependencies for docker compose
+#   easy_install:
+#     name: pip
+#     state: latest
+#   become: yes
 
 - name: Install docker compose
   pip:

@@ -1,0 +1,5 @@
+- name: Install aws-cli
+  pip:
+    name: awscli
+    state: latest
+    extra_args: --user

@@ -3,32 +3,41 @@
 This project aims to bootstrap your WSL distribution (currently only Ubuntu supported) with opinionated development tools and configs.
 Before you start using this repo, please install WSL following the [official documentation](https://docs.microsoft.com/en-us/windows/wsl/install-win10#for-anniversary-update-and-creators-update-install-using-lxrun).
 
-__Please choose Ubuntu as it is the only Linux distribution which is supported by WSL-bootstrap__
+__Please choose Ubuntu as it is the only Linux distribution which is fully supported by WSL-bootstrap__
 
-Once WSL installed, proceed next.
+Once WSL and Ubuntu installed, proceed next.
 
 ## Configure terminal
 
 For a better development experience with WSL, install the [Hyper](https://hyper.is) terminal.
-Once Hyper installed, open it's configuration file (Ctrl+Comma), find the `shell` parameter and assign it the following value:
+Once Hyper installed, open it's configuration file (Ctrl+Comma), find `shell` and `shellArgs` parameters and assign them the following values:
 
 ```
-shell: 'C:\\Windows\\System32\\bash.exe'
+shell: 'wsl.exe'
+shellArgs: ['~'],
 ```
 
 Now you will be dropped into your WSL shell every time you launch Hyper.
 
 ### Terminal font
 
-WSL-bootstrap uses Powerline symbols to make your console look awesome. In order to display those symbols correctly, on your Windows host install one of your favourite fonts patched with Powerline symbols from the [powerline/fonts](https://github.com/powerline/fonts) repository.
+WSL-bootstrap uses Powerline symbols to make your console look awesome. In order to display those symbols correctly, on your Windows host install one of your favourite fonts patched with Powerline symbols from the awesone [nerd-fonts](https://github.com/ryanoasis/nerd-fonts/releases) repository. Just pickup the font you like, download the archive, extract, select all the Windows Compatible fonts, right click -> Install. SourceCodePro font is highly recomended.
 
 Once Powerline font is installed, open the Hyper config file (Ctrl+Comma) and specify your font like this:
 
 ```
-fontFamily: '"Ubuntu Mono derivative Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+fontFamily: '"SauceCodePro NF", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 ```
 
 Restart Hyper and you should be dropped into your Linux shell with specified font.
+
+### Terminal theme
+
+To make Hyper Terminal even more awesome, install one of the [awesome themes](https://github.com/bnb/awesome-hyper#themes), for example hyper-atom-dark-transparent. Add this to your Hyper config (Ctrl+Comma):
+
+```
+plugins: ['hyper-atom-dark-transparent'],
+```
 
 
 ## Install WSL-bootstrap
@@ -45,6 +54,7 @@ To do this just symlink the WSL-bootstrap repo into the root of your home folder
 ```sh
 ln -s /mnt/c/Users/<YOUR_USERNAME>/path/to/cloned/wsl-bootstrap ~/wsl-bootstrap
 ```
+Make sure that you can now navigate into wsl-bootstrap folder with `cd ~/wsl-bootstrap`.
 
 ## Bootstrapping your Linux distribution
 
@@ -56,10 +66,17 @@ You can do it manually following [official documentation](http://docs.ansible.co
 sudo ~/wsl-bootstrap/bin/install_ansible_ubuntu.sh
 ```
 
-Once Ansible installed, run:
+### Docker for Windows and Docker Toolbox
+
+If you have to use Docker Toolbox for running docker on Windows, then set `docker_toolbox: yes` in the ./group_vars/local file.
+Otherwise, WSL will be configured for working with Docker for Windows asuming you have exposed docker daemon port in docker settings.
+
+### Run Ansible playbook
+
+To bootstrap your Ubuntu installation, run:
 
 ```sh
 ~/wsl-bootstrap/bin/wsl-bootstrap
 ```
 
-Ansible will ask for your SUDO password. Type it in and go get a cup of coffee. When bootstraping complete, close the terminal and open it again. Enjoy!
+Ansible will ask for your SUDO password. Type it in and go get a cup of coffee. When bootstraping completes, close the terminal and open it again. Enjoy!

@@ -1,7 +1,47 @@
-
 - import_tasks: debian.yml
   when: ansible_os_family == "Debian"
 # - import_tasks: osx.yml
 #   when: ansible_os_family == "Darwin"
 # - import_tasks: redhat.yml
 #   when: ansible_os_family == "RedHat"
+
+# When using WSL on Windows we want to connect to the Docker daemon working on host 
+- name: Specify Docker daemon url (Docker for Windows)
+  lineinfile:
+    path: "{{ wsl_bootstrap_user_home }}/.zshrc"
+    regexp: "DOCKER_HOST"
+    line: "export DOCKER_HOST='tcp://0.0.0.0:2375'"
+  when: docker_toolbox
+
+- name: Launch Docker Toolbox on host
+  block:
+    - name: Check if Docker is running
+      command: docker-machine.exe ip
+      register: docker_machine_result
+      failed_when: no
+      changed_when: no
+    - name: Start Docker
+      command: docker-machine.exe start
+      when: docker_machine_result.rc > 0
+  when: docker_toolbox
+
+- name: Ensure .zshrc contains Docker variables
+  command: "grep -Fxq 'DOCKER_HOST' {{ wsl_bootstrap_user_home }}/.zshrc"
+  register: checkmyconf
+  check_mode: no
+  failed_when: no
+  changed_when: no
+  when: docker_toolbox
+
+- name: Put Docker env variables to .zshrc
+  block:
+    - command: sh -c 'docker-machine.exe env --shell bash | sed "s|C:|/c|" | sed "s|\\\\|\/|g" | sed "s|#.*$||g"'
+      register: docker_machine_env_result
+    #- debug:
+    #    msg: "{{ docker_machine_env_result }}"
+    - blockinfile:
+        dest: "{{ wsl_bootstrap_user_home }}/.zshrc"
+        content: "{{ docker_machine_env_result.stdout }}"
+  when: 
+    - docker_toolbox
+    - checkmyconf.rc == 1

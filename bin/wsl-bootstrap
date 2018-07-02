@@ -1,3 +1,2 @@
 echo "Setting up local dev environment..."
-#ansible-playbook -i ~/dotfiles/hosts ~/dotfiles/inventory/localhost.yml --ask-sudo-pass
-ansible-playbook -i ~/code/wsl-bootstrap/hosts  ~/code/wsl-bootstrap/local_env.yml -K
+ansible-playbook -i ~/wsl-bootstrap/hosts  ~/wsl-bootstrap/local_env.yml -K
