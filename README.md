@@ -45,7 +45,7 @@ plugins: ['hyper-atom-dark-transparent'],
 Clone this repo:
 
 ```sh
-git clone https://git.epam.com/Aleksandr_Sukhovetchenko/wsl-bootstrap.git
+git clone https://github.com/cyxou/wsl-bootstrap.git
 ```
 
 Next make sure that the WSL-bootstrap is available from the /home/<your_linux_user> folder in your Linux distro.
