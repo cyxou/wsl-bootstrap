@@ -8,6 +8,7 @@
   # roles are a way to group tasks; they will run in the sequence determined here
   roles:
     - wsl
+    - base16
     - common
     - git
     - zsh
