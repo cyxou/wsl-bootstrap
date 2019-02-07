@@ -7,10 +7,15 @@ __Please choose Ubuntu as it is the only Linux distribution which is fully suppo
 
 Once WSL and Ubuntu installed, proceed next.
 
-## Configure terminal
+## Configure your terminal
 
-For a better development experience with WSL, install the [Hyper](https://hyper.is) terminal.
-Once Hyper installed, open it's configuration file (Ctrl+Comma), find `shell` and `shellArgs` parameters and assign them the following values:
+### WSLtty (preffered)
+For a better development experience with WSL, install the [WSLtty](https://github.com/mintty/wsltty/releases) terminal.
+
+### Hyper
+You might prefer [Hyper](https://hyper.is) terminal which is kind of a hipsterish. But I couldn't configure it properly to work with tmux under WSL.
+In case you don't care about using tmux, than use Hyper.
+Once Hyper is installed, open it's configuration file (Ctrl+Comma), find `shell` and `shellArgs` parameters and assign them the following values:
 
 ```
 shell: 'wsl.exe'
@@ -30,6 +35,8 @@ fontFamily: '"SauceCodePro NF", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Con
 ```
 
 Restart Hyper and you should be dropped into your Linux shell with specified font.
+
+__NOTE__ For some reasons WSLtty does not see some of the NerdFonts but [ConsolasNF](https://github.com/whitecolor/my-nerd-fonts/tree/master/Consolas%20NF) works good.
 
 ### Terminal theme
 
