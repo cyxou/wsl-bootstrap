@@ -49,14 +49,15 @@ plugins: ['hyper-atom-dark-transparent'],
 
 ## Install WSL-bootstrap
 
-Clone this repo:
+Now when you've istalled WSL and a terminal of your choice, open your WSL
+distribution, navigate to the `home` folder (`cd`) and clone this repo:
 
 ```sh
 git clone https://github.com/cyxou/wsl-bootstrap.git
 ```
 
-Next make sure that the WSL-bootstrap is available from the /home/<your_linux_user> folder in your Linux distro.
-To do this just symlink the WSL-bootstrap repo into the root of your home folder in Linux distro. Open your Bash terminal (Hyper) and run:
+Once again, make sure that the `wsl-bootstrap` folder is located in the /home/<your_linux_user> folder in your Linux distro.
+If you've decided to clone this repo to another folder, than just symlink the `wsl-bootstrap` repo into the root of your home folder in Linux distro. Open your WSL terminal (wslttty or Hyper) and run:
 
 ```sh
 ln -s /mnt/c/Users/<YOUR_USERNAME>/path/to/cloned/wsl-bootstrap ~/wsl-bootstrap
