@@ -1,9 +1,8 @@
----
 - name: Install nvm dependencies
-  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
-  with_items:
-    - build-essential
-    - libssl-dev
+  apt:
+    name: [ 'build-essential', 'libssl-dev' ]
+    update_cache: yes
+    cache_valid_time: 3600
   become: yes
   tags: nvm
 
