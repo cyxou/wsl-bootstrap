@@ -36,7 +36,13 @@ fontFamily: '"SauceCodePro NF", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Con
 
 Restart Hyper and you should be dropped into your Linux shell with specified font.
 
-__NOTE__ For some reasons WSLtty does not see some of the NerdFonts but [ConsolasNF](https://github.com/whitecolor/my-nerd-fonts/tree/master/Consolas%20NF) works good.
+__NOTE__ For some reasons WSLtty displays only monochrome fonts under its settings thus most of the the NerdFonts are not available for setting via GUI, but you still may set you font via `config` file located in located in the `%APPDATA\wsltty` directory:
+
+```
+...
+Font=SauceCodePro NF
+...
+```
 
 ### Terminal theme
 
