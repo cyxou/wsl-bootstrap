@@ -12,6 +12,7 @@
     - common
     - git
     - zsh
+    - fzf
     - tmux
     - docker
     - docker-compose
