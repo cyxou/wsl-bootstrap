@@ -1,4 +1,3 @@
-
 # - name: Add nessessary PPAs
 #   apt_repository:
 #     repo: ppa:hadret/fswatch
@@ -6,5 +5,8 @@
 #   become: yes
 
 - name: Install common packages
-  apt: "name=['tree', 'python-pip', 'python-setuptools'] state=latest update_cache=yes"
+  apt: 
+    name: ['tree', 'python-pip', 'python-setuptools', 'ack']
+    state: latest
+    update_cache: yes
   become: yes

@@ -1,4 +1,4 @@
-# vi: set ft=yaml :
+# vi: set ft=yaml:
 
 # NOTE: The below 2 variables should not need to be changed if you cloned
 #   this repo to '~/wsl-bootstrap'
@@ -9,7 +9,7 @@ wsl_bootstrap_home: "{{wsl_bootstrap_user_home}}/wsl-bootstrap"
 
 # Git
 # Name used in commit messages
-full_name: Alex Sukhov
+full_name:
 # Github username
 git_user:
 # If you use github, this should be the same as the email used on Github
@@ -19,7 +19,7 @@ git_email:
 # See https://github.com/pstadler/keybase-gpg-github setup instructions
 git_signing_key:
 
-# If you are using Docker Tollbox and not Docker for Windows then set this value to 'true'.
-# Otherwise set it to 'false'
-# Docker Toolbox is mostly used when Hyper-V is unavailable, e.i. Windows Home edition.
+# If you are using Docker Tollbox (not Docker for Windows) then set this value to 'true',
+# otherwise set it to 'false'.
+# Docker Toolbox is mostly used when Hyper-V is unavailable, e.i. on Windows Home edition.
 docker_toolbox: false
