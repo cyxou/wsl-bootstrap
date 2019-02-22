@@ -1,18 +1,6 @@
-- name: Install fzf
-  block:
-
-    # We use ripgrep as it is more robust than standard find
-    - name: Install ripgrep
-      apt:
-        name: ripgrep
-        state: latest
-      become: yes
-
-    - name: Clone fzf repo
-      git:
-        repo: https://github.com/junegunn/fzf.git
-        dest: "{{ wsl_bootstrap_user_home }}/.fzf"
-        depth: 1
-
-    - name: Install fzf
-      command: "{{ wsl_bootstrap_user_home }}/.fzf/install --all"
+# We use ripgrep as it is more robust than standard find
+- name: Install ripgrep
+  apt:
+    name: ripgrep
+    state: latest
+  become: yes

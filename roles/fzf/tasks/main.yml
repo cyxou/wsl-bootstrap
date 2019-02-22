@@ -1,0 +1,12 @@
+# Installation and setup
+- import_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Clone fzf repo
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: "{{ wsl_bootstrap_user_home }}/.fzf"
+    depth: 1
+
+- name: Install fzf
+  command: "{{ wsl_bootstrap_user_home }}/.fzf/install --all"
