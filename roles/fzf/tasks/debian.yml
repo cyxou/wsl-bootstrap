@@ -1,6 +1,20 @@
 # We use ripgrep as it is more robust than standard find
-- name: Install ripgrep
+- name: Create temporary directory for ripgrep
+  tempfile:
+    state: directory
+    suffix: ripgrep
+  register: ripgrep_temp_dir
+
+- debug:
+    var: ripgrep_temp_dir
+
+- name: Download ripgrep deb package
+  get_url: 
+    url: https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+    dest: "{{ ripgrep_temp_dir.path }}/ripgrep.deb"
+
+- name: Install ripgrep deb package
   apt:
-    name: ripgrep
-    state: latest
+    deb: "{{ ripgrep_temp_dir.path }}/ripgrep.deb"
+    state: installed
   become: yes
