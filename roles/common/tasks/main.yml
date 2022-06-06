@@ -6,7 +6,7 @@
 
 - name: Install common packages
   apt: 
-    name: ['tree', 'python-pip', 'python-setuptools', 'ack']
+    name: ['tree', 'curl', 'python-setuptools', 'ack']
     state: latest
     update_cache: yes
   become: yes

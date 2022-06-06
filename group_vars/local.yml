@@ -18,8 +18,3 @@ git_email:
 # GPG Key ID used to sign git commits
 # See https://github.com/pstadler/keybase-gpg-github setup instructions
 git_signing_key:
-
-# If you are using Docker Tollbox (not Docker for Windows) then set this value to 'true',
-# otherwise set it to 'false'.
-# Docker Toolbox is mostly used when Hyper-V is unavailable, e.i. on Windows Home edition.
-docker_toolbox: false

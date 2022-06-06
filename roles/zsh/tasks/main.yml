@@ -29,10 +29,16 @@
     dest: "{{ wsl_bootstrap_user_home }}/.zshrc"
   when: cloning is succeeded
 
-- name: Install PowerLevel9k
+- name: Install PowerLevel10k
   git:
-    repo: https://github.com/bhilburn/powerlevel9k.git
-    dest: "{{ wsl_bootstrap_user_home }}/.oh-my-zsh/custom/themes/powerlevel9k"
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ wsl_bootstrap_user_home }}/powerlevel10k"
+
+- name: Copying our .p10k.zsh to ~/.p10k.zsh
+  copy:
+    src: "{{ wsl_bootstrap_home }}/roles/zsh/files/.p10k.zsh"
+    dest: "{{ wsl_bootstrap_user_home }}/.p10k.zsh"
+  when: cloning is succeeded
 
 # When using WSL on Windows prior 16215 build, we can't change the shell with
 # the `chsh -s /usr/bin/zsh` command. We need to launch zsh from the .bashrc file.

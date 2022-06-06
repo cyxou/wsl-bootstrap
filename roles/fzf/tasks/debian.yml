@@ -5,16 +5,13 @@
     suffix: ripgrep
   register: ripgrep_temp_dir
 
-- debug:
-    var: ripgrep_temp_dir
-
 - name: Download ripgrep deb package
   get_url: 
-    url: https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+    url: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
     dest: "{{ ripgrep_temp_dir.path }}/ripgrep.deb"
 
 - name: Install ripgrep deb package
   apt:
     deb: "{{ ripgrep_temp_dir.path }}/ripgrep.deb"
-    state: installed
+    state: present
   become: yes

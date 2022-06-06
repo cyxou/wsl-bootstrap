@@ -1,6 +1,6 @@
 - name: Install packages to allow apt to use a repository over HTTPS
   apt:
-    name: [ 'apt-transport-https', 'ca-certificates', 'software-properties-common', 'python-setuptools']
+    name: [ 'apt-transport-https', 'gnupg', 'lsb-release', 'ca-certificates', 'software-properties-common', 'python-setuptools' ]
     state: present
   become: yes
 
@@ -19,7 +19,7 @@
 
 - name: Install Docker CE
   apt:
-    name: docker-ce
+    name: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose-plugin' ]
     state: present
     update_cache: yes
   register: apt_result
@@ -28,3 +28,24 @@
   delay: 1
   become: yes
   ignore_errors: yes
+
+- name: Create /etc/docker directory
+  file:
+    path: /etc/docker
+    state: directory
+  become: yes
+
+- name: Expose docker daemon to windows host
+  copy:
+    src: "{{ wsl_bootstrap_home }}/roles/docker/files/daemon.json"
+    dest: /etc/docker/daemon.json
+  become: yes
+  notify: restart docker
+
+- name: Add current user to the docker group
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+    generate_ssh_key: yes
+  become: yes
