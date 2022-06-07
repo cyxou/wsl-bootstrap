@@ -34,5 +34,7 @@
     - wsl
     - zsh
     - fzf
+    - thefuck
     - docker
     - nvm
+    - earthly

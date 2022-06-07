@@ -1,0 +1,13 @@
+# Install the fuck tool: https://github.com/nvbn/thefuck
+
+- name: Install pip pre-requisites
+  apt: 
+    name: [ "python3-dev", "python3-pip", "python3-setuptools" ]
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Install the fuck for a user
+  pip:
+    name: thefuck
+    extra_args: --user

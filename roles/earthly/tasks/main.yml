@@ -1,0 +1,9 @@
+- name: Donwload Earthly binary
+  get_url:
+    url: https://github.com/earthly/earthly/releases/latest/download/earthly-linux-amd64
+    dest: /usr/local/bin/earthly
+    mode: "0777"
+  become: yes
+
+- name: Bootstrap Earthly with autocomplete
+  command: /usr/local/bin/earthly bootstrap --with-autocomplete
