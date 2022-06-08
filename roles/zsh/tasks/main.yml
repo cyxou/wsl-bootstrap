@@ -32,6 +32,7 @@
 - name: Install PowerLevel10k
   git:
     repo: https://github.com/romkatv/powerlevel10k.git
+    depth: 1
     dest: "{{ wsl_bootstrap_user_home }}/powerlevel10k"
 
 - name: Copying our .p10k.zsh to ~/.p10k.zsh
@@ -53,3 +54,9 @@
     name: "{{ lookup('env','USER') }}"
     shell: /usr/bin/zsh
   become: yes
+
+- name: Install zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    depth: 1
+    dest: "{{ wsl_bootstrap_user_home }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"

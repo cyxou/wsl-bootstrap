@@ -1,0 +1,17 @@
+- name: Install openssh-server
+  apt:
+    name: openssh-server
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: Configure ssh to connect with password
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    line: "{{ item }}"
+  with_items:
+    - 'Port 22'
+    - 'ListenAddress 0.0.0.0'
+    - 'PasswordAuthentication yes'
+  notify: restart ssh
+  become: yes

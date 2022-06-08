@@ -1,0 +1,5 @@
+- name: Install zsh-autocomplete
+  git:
+    repo: https://github.com/marlonrichert/zsh-autocomplete.git
+    depth: 1
+    dest: "{{ wsl_bootstrap_user_home }}/.zsh-autocomplete"

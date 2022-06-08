@@ -11,3 +11,10 @@
   pip:
     name: thefuck
     extra_args: --user
+
+- name: Edit ~/.zshrc to add fuck alias
+  lineinfile:
+    path: "{{ wsl_bootstrap_user_home }}/.zshrc"
+    line: "{{ item }}"
+  with_items:
+    - 'eval $(thefuck --alias)'

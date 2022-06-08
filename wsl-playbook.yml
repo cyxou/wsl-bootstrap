@@ -35,6 +35,7 @@
     - zsh
     - fzf
     - thefuck
+    - ssh
     - docker
     - nvm
     - earthly

@@ -66,7 +66,7 @@ export ZSH=$HOME/.oh-my-zsh
 plugins=(
   git
   docker
-  aws
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
